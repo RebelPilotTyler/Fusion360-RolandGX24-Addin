@@ -56,7 +56,7 @@ Option B: Clone it with Git if you know how.
 2. Paste this and press Enter:
 
 ```
-%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns`
+%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns
 ```
 
 3. Copy the **entire** add-in folder into that directory.
