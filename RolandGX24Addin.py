@@ -116,6 +116,19 @@ class HPGLExporter:
             return 32
         return max(8, min(720, int(__import__('math').ceil(sweep_rad / step))))
 
+    def _transform_point(
+        self, point: Tuple[float, float], origin: Tuple[float, float], bbox_max: Tuple[float, float]
+    ) -> Tuple[float, float]:
+        x_cm = point[0] - origin[0]
+
+        if self.options.origin_mode == 'lower_left':
+            y_cm = bbox_max[1] - point[1]
+        else:
+            y_cm = -(point[1] - origin[1])
+        return x_cm, y_cm
+
+    def _to_plotter_units(self, point_cm: Tuple[float, float]) -> Tuple[int, int]:
+        x_cm, y_cm = point_cm
     def _to_plotter_units(self, x_cm: float, y_cm: float) -> Tuple[int, int]:
         x_u = self._cm_to_output_units(x_cm) * self.options.scale
         y_u = self._cm_to_output_units(y_cm) * self.options.scale
@@ -129,6 +142,14 @@ class HPGLExporter:
         return self.options.tolerance * (0.1 if self.options.units == 'mm' else 2.54)
 
     @staticmethod
+    def _bounding_extents(
+        polylines: Sequence[Sequence[Tuple[float, float]]]
+    ) -> Tuple[Tuple[float, float], Tuple[float, float]]:
+        min_x = min(p[0] for poly in polylines for p in poly)
+        min_y = min(p[1] for poly in polylines for p in poly)
+        max_x = max(p[0] for poly in polylines for p in poly)
+        max_y = max(p[1] for poly in polylines for p in poly)
+        return (min_x, min_y), (max_x, max_y)
     def _bounding_min(polylines: Sequence[Sequence[Tuple[float, float]]]) -> Tuple[float, float]:
         min_x = min(p[0] for poly in polylines for p in poly)
         min_y = min(p[1] for poly in polylines for p in poly)
