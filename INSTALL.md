@@ -9,7 +9,7 @@ This avoids occasional Fusion quirks around launching external scripts.
 
 ---
 
-## 0) What you need (checklist)
+## 0) What you need
 
 - Windows 10/11 laptop/PC
 - Autodesk Fusion 360 installed
@@ -25,8 +25,8 @@ This avoids occasional Fusion quirks around launching external scripts.
 **Goal:** The cutter should appear in Windows as a printer named something like **“Roland GX-24”**.
 
 1. Go to the Roland driver/support page:
-   - Roland DGA GX-24 support page: https://www.rolanddga.com/support/products/cutting/camm-1-gx-24-24-vinyl-cutter?
-   - Roland DG Download Center GX-24 page: https://downloadcenter.rolanddg.com/GX-24?  
+   - Roland DGA GX-24 support page: https://www.rolanddga.com/support/products/cutting/camm-1-gx-24-24-vinyl-cutter
+   - Roland DG Download Center GX-24 page: https://downloadcenter.rolanddg.com/GX-24
 
 2. Download the **CAMM-1 driver** for your Windows version (Windows 10/11 is typical).
 
@@ -44,7 +44,7 @@ If you do NOT see it, please re-attempt the install — the driver install is re
 
 ## 2) Install the Fusion 360 Add-in
 
-Autodesk’s official “install add-in” guide is here: https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-install-an-ADD-IN-and-Script-in-Fusion-360.html?
+Autodesk’s official “install add-in” guide is here: https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-install-an-ADD-IN-and-Script-in-Fusion-360.html
 
 ### 2.1 Download this repo
 Option A (easiest): Download the repo ZIP from GitHub and unzip it.  
@@ -84,7 +84,7 @@ If you don’t see them, restart Fusion after running the add-in once.
 **Goal:** You can run the sender helper script.
 
 1. Download Python for Windows from the official site:
-- Python Windows downloads: https://www.python.org/downloads/windows/?
+- Python Windows downloads: https://www.python.org/downloads/windows/
 
 2. Run the installer.
 - IMPORTANT: Check **“Add Python to PATH”** during install (if shown).
@@ -108,7 +108,7 @@ py --version
 ## 4) Install pywin32 (needed to send HPGL to the cutter)
 
 The helper uses **pywin32** to send a RAW print job to the GX-24 printer.  
-pywin32 official package info: https://pypi.org/project/pywin32/?
+pywin32 official package info: https://pypi.org/project/pywin32/
 
 1. Open **PowerShell**
 2. Run:
@@ -156,7 +156,7 @@ Now you can double-click `GX-24 Sender` any time to send a `.plt` file.
 
 ---
 
-## 6) How to use (full workflow)
+## 6) How to use
 
 ### 6.1 Export from Fusion
 1. In Fusion 360, open your design
