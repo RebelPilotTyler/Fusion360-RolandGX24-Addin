@@ -55,7 +55,7 @@ Option B: Clone it with Git if you know how.
 1. Press **Win + R**
 2. Paste this and press Enter:
 
-%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns
+`%APPDATA%\Autodesk\Autodesk Fusion 360\API\AddIns`
 
 3. Copy the **entire** add-in folder into that directory.
 
@@ -113,14 +113,14 @@ pywin32 official package info: https://pypi.org/project/pywin32/
 1. Open **PowerShell**
 2. Run:
 
-python -m pip install --upgrade pip
-python -m pip install --upgrade pywin32
+`python -m pip install --upgrade pip`
+`python -m pip install --upgrade pywin32`
 
 
 If `python` doesn’t work but `py` does, use:
 
-py -m pip install --upgrade pip
-py -m pip install --upgrade pywin32
+`py -m pip install --upgrade pip`
+`py -m pip install --upgrade pywin32`
 
 
 ---
