@@ -17,10 +17,6 @@ This add-in creates two Fusion 360 commands:
 - **Output Path**
 - **Filename** (`.plt` auto-appended if omitted)
 
-> Notes:
-> - Y output is flipped for GX-24 style top-left plotter coordinates so the cut origin aligns to the lower-left of exported geometry.
-> - Output Path defaults to your user `Downloads` folder (or home folder fallback).
-
 ## Install
 
 1. Put this folder in your Fusion 360 AddIns directory.
