@@ -3,7 +3,6 @@ import subprocess
 import sys
 import traceback
 from dataclasses import dataclass
-from pathlib import Path
 from typing import List, Optional, Sequence, Tuple
 
 import adsk.core
@@ -45,12 +44,12 @@ class HPGLExporter:
             raise ValueError('No sketch curves were selected.')
 
         polylines = [self._curve_to_polyline(c) for c in curves]
-        bbox_min, bbox_max = self._bounding_extents(polylines)
+        bbox_min = self._bounding_min(polylines)
         origin = bbox_min if self.options.origin_mode == 'lower_left' else (0.0, 0.0)
 
         hpgl_lines = ['IN;', 'SP1;']
         for poly in polylines:
-            transformed = [self._to_plotter_units(self._transform_point(p, origin, bbox_max)) for p in poly]
+            transformed = [self._to_plotter_units(p[0] - origin[0], p[1] - origin[1]) for p in poly]
             if len(transformed) < 2:
                 continue
             start = transformed[0]
@@ -130,6 +129,7 @@ class HPGLExporter:
 
     def _to_plotter_units(self, point_cm: Tuple[float, float]) -> Tuple[int, int]:
         x_cm, y_cm = point_cm
+    def _to_plotter_units(self, x_cm: float, y_cm: float) -> Tuple[int, int]:
         x_u = self._cm_to_output_units(x_cm) * self.options.scale
         y_u = self._cm_to_output_units(y_cm) * self.options.scale
         factor = 40.0 if self.options.units == 'mm' else 1016.0
@@ -150,6 +150,10 @@ class HPGLExporter:
         max_x = max(p[0] for poly in polylines for p in poly)
         max_y = max(p[1] for poly in polylines for p in poly)
         return (min_x, min_y), (max_x, max_y)
+    def _bounding_min(polylines: Sequence[Sequence[Tuple[float, float]]]) -> Tuple[float, float]:
+        min_x = min(p[0] for poly in polylines for p in poly)
+        min_y = min(p[1] for poly in polylines for p in poly)
+        return min_x, min_y
 
 
 class CommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
@@ -178,7 +182,7 @@ class CommandCreatedHandler(adsk.core.CommandCreatedEventHandler):
             origin_dd.listItems.add('Lower Left of Bounding Box', True)
             origin_dd.listItems.add('Sketch Origin', False)
 
-            inputs.addStringValueInput('outputPath', 'Output Path', _default_output_path())
+            inputs.addStringValueInput('outputPath', 'Output Path', '')
             inputs.addStringValueInput('filename', 'Filename', 'output.plt')
 
             on_execute = CommandExecuteHandler(self.send_after_export)
@@ -245,11 +249,6 @@ def _selected_text(dropdown_input) -> str:
 
 def _creation_flags() -> int:
     return 0x00000008 if sys.platform.startswith('win') else 0
-
-
-def _default_output_path() -> str:
-    downloads = Path.home() / 'Downloads'
-    return str(downloads if downloads.exists() else Path.home())
 
 
 def _message(text: str):
