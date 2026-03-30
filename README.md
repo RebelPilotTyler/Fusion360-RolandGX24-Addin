@@ -23,6 +23,8 @@ This add-in creates two Fusion 360 commands:
 
 ## Install
 
+Full installation instructions noted in INSTALL.md.
+
 1. Put this folder in your Fusion 360 AddIns directory.
 2. In Fusion 360, go to **Scripts and Add-Ins** and run **RolandGX24Addin**.
 
@@ -36,15 +38,5 @@ pip install pywin32
 
 Then choose your printer and send the generated `.plt` file as a RAW print job.
 
-## Troubleshooting branch merge / install mismatch
-
-If Fusion still shows an error referencing `_bounding_min(...)` inside `export()`, your installed add-in files are likely stale.
-
-Verify this installed file:
-
-`C:/Users/<you>/AppData/Roaming/Autodesk/Autodesk Fusion 360/API/AddIns/Fusion360-RolandGX24-Addin/RolandGX24Addin.py`
-
-Expected signatures in the installed file:
-
-- `bbox_min, bbox_max = self._bounding_extents(polylines)` in `export()`
-- `@staticmethod def _bounding_min(polylines)` exists as a compatibility helper
+## Credit
+Created by Tyler Widener, assisted by ChatGPT and Codex.
