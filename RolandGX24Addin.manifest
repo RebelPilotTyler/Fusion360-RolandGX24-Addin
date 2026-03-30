@@ -6,7 +6,7 @@
   "description": {
     "": "Exports selected sketch curves to HPGL for Roland GX-24, with optional helper send step."
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "runOnStartup": false,
   "supportedOS": "windows|mac",
   "editEnabled": true
