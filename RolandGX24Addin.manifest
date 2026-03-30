@@ -1,0 +1,13 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "97f24185-7f06-40ef-bf23-3e0d4ce03d30",
+  "author": "Fusion360-RolandGX24-Addin",
+  "description": {
+    "": "Exports selected sketch curves to HPGL for Roland GX-24, with optional helper send step."
+  },
+  "version": "1.0.0",
+  "runOnStartup": false,
+  "supportedOS": "windows|mac",
+  "editEnabled": true
+}
